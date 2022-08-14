@@ -11,6 +11,7 @@ import { PhotoService } from "../photo/photo.service";
 })
 export class PhotoListComponent implements OnInit {
   photos: Photo[] = [];
+  filter: string = "";
 
   constructor(
     private photoService: PhotoService,
@@ -22,5 +23,9 @@ export class PhotoListComponent implements OnInit {
     this.photoService
       .listFromUser(userName)
       .subscribe(photos => (this.photos = photos));
+  }
+
+  onKeyup(event: Event) {
+    this.filter = (event.target as HTMLInputElement).value;
   }
 }
